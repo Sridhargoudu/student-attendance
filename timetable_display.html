@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Display</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; text-align: center; }
+        h2, h3 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        select { width: 90%; padding: 5px; text-align: center; }
+        button { padding: 10px 20px; margin-top: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Timetable Display</h2>
+    <h3 id="facultyName">Faculty Name: [Faculty Name]</h3>
+    <h3 id="details">Branch: [Branch] | Year: [Year] | Section: [Section] | Subject: [Subject]</h3>
+
+    <table id="timetable">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Class 1 (Start - End)</th>
+                <th>Class 2 (Start - End)</th>
+                <th>Class 3 (Start - End)</th>
+                <th>Class 4 (Start - End)</th>
+                <th>Class 5 (Start - End)</th>
+                <th>Class 6 (Start - End)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+                function createTimeDropdown(type) {
+                    let options = '<option value="00">00</option>';
+                    if (type === "hour") {
+                        for (let i = 8; i <= 18; i++) {
+                            options += `<option value="${i}">${i}</option>`;
+                        }
+                    } else if (type === "minute") {
+                        for (let i = 0; i < 60; i++) {
+                            options += `<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`;
+                        }
+                    }
+                    return options;
+                }
+
+                days.forEach(day => {
+                    document.write(`
+                        <tr>
+                            <td>${day}</td>
+                            ${Array(6).fill(`
+                                <td>
+                                    <select class="hour">${createTimeDropdown("hour")}</select>:
+                                    <select class="minute">${createTimeDropdown("minute")}</select> - 
+                                    <select class="hour">${createTimeDropdown("hour")}</select>:
+                                    <select class="minute">${createTimeDropdown("minute")}</select>
+                                </td>
+                            `).join('')}
+                        </tr>
+                    `);
+                });
+            </script>
+        </tbody>
+    </table>
+
+    <button onclick="saveTimetable()">Save Timetable</button>
+
+    <script>
+        // Retrieve URL parameters (branch, year, section, subject)
+        const urlParams = new URLSearchParams(window.location.search);
+        const branch = urlParams.get('branch') || "CSE";
+        const year = urlParams.get('year') || "2nd";
+        const section = urlParams.get('section') || "A";
+        const subject = urlParams.get('subject') || "Mathematics";
+
+        // Get faculty name from localStorage
+        const facultyName = localStorage.getItem("facultyName") || "Unknown Faculty";
+
+        document.getElementById("facultyName").innerText = `Faculty Name: ${facultyName}`;
+        document.getElementById("details").innerText = `Branch: ${branch} | Year: ${year} | Section: ${section} | Subject: ${subject}`;
+
+        function saveTimetable() {
+            const timetable = [];
+            document.querySelectorAll("#timetable tbody tr").forEach(row => {
+                const day = row.cells[0].innerText;
+                const classes = [];
+
+                for (let i = 1; i <= 6; i++) {
+                    const selects = row.cells[i].querySelectorAll("select");
+                    const startHour = selects[0].value;
+                    const startMinute = selects[1].value;
+                    const endHour = selects[2].value;
+                    const endMinute = selects[3].value;
+                    classes.push({ startHour, startMinute, endHour, endMinute });
+                }
+
+                timetable.push({ day, classes });
+            });
+
+            localStorage.setItem("facultyTimetable", JSON.stringify(timetable));
+            alert("Timetable saved successfully!");
+        }
+
+        // Pre-load saved timetable if available
+        window.onload = function() {
+            const savedTimetable = JSON.parse(localStorage.getItem("facultyTimetable"));
+            if (savedTimetable) {
+                document.querySelectorAll("#timetable tbody tr").forEach((row, index) => {
+                    const savedClasses = savedTimetable[index].classes;
+                    row.querySelectorAll("td").forEach((cell, i) => {
+                        if (i > 0) {
+                            const selects = cell.querySelectorAll("select");
+                            selects[0].value = savedClasses[i - 1]?.startHour || "08";
+                            selects[1].value = savedClasses[i - 1]?.startMinute || "00";
+                            selects[2].value = savedClasses[i - 1]?.endHour || "09";
+                            selects[3].value = savedClasses[i - 1]?.endMinute || "00";
+                        }
+                    });
+                });
+            }
+        };
+    </script>
+
+</body>
+</html>

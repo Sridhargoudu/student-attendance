@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOD Sign-Up</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        form { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button, select { width: 100%; padding: 10px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+    <h2>HOD Sign-Up</h2>
+    <form id="signupForm" onsubmit="event.preventDefault(); registerHOD();">
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <input type="text" id="hodId" placeholder="Enter ID" required>
+        <select id="branch" required>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="civil">CIVIL</option>
+            <option value="mech">MECH</option>
+            <option value="eee">EEE</option>
+            <option value="aiml">AIML</option>
+            <option value="aids">AIDS</option>
+            <option value="iot">IOT</option>
+            <option value="cs">CS</option>
+            <option value="it">IT</option>
+        </select>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="hod_signin.html">Sign in</a></p>
+
+    <script>
+        async function registerHOD() {
+            let name = document.getElementById("name").value;
+            let hodId = document.getElementById("hodId").value; // ✅ Fixed ID reference
+            let branch = document.getElementById("branch").value;
+            let password = document.getElementById("password").value;
+
+            if (!name || !hodId || !branch || !password) {
+                alert("⚠️ Please fill all fields!");
+                return;
+            }
+
+            try {
+                let response = await fetch("http://localhost:5000/hod_signup", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, hodId, branch, password }) // ✅ Corrected field names
+                });
+
+                let data = await response.json(); // Convert response to JSON
+                alert(data.message || JSON.stringify(data)); // ✅ Safer error handling
+
+                if (response.ok) {
+                    window.location.href = "hod_signin.html"; // Redirect to Sign-In Page
+                }
+            } catch (error) {
+                console.error("Signup Error:", error);
+                alert("❌ Signup Failed! Check console.");
+            }
+        }
+    </script>
+
+</body>
+</html>

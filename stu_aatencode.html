@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Attendance Code</title>
+    <link rel="stylesheet" href="stu_styles.css">
+    <script src="stu_script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Attendance Code</h2>
+        <input type="text" id="attendanceCode" placeholder="Enter 5-digit Code">
+        <button onclick="markAttendance()">Submit</button>
+        <p id="attendanceStatus"></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+    <script>
+        document.getElementById("attendanceForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const code = document.getElementById("attendanceCode").value;
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:5000/api/attendance/mark-attendance", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token, // Pass the token for authentication
+        },
+        body: JSON.stringify({ student_id: 1, code }), // Change student_id dynamically
+    });
+
+    const data = await response.json();
+    alert(data.message);
+});
+
+        </Script>
+</body>
+</html>

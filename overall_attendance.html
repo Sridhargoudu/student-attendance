@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Summary</title>
+    <link rel="stylesheet" href="syles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.container {    
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header img {
+    width: 100px;
+}
+
+.info-table, .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.info-table td, .attendance-table th, .attendance-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.attendance-table th {
+    background: #ddd;
+}
+
+.legend {
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.present { color: green; }
+.absent { color: red; }
+.holiday { color: blue; }
+.weekend { color: purple; }
+.halfday { color: orange; }
+
+.print-btn {
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.print-btn:hover {
+    background: darkgreen;
+}
+
+    </style>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="clg.jpg" alt="College Logo" class="logo">
+            <h2>SRI INDU INSTITUTE OF ENGINEERING AND TECHNOLOGY</h2>
+            <h5>sheriguda</h5>
+            <h3>STUDENT ATTENDANCE SUMMARY</h3>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <td><strong>PIN</strong></td>
+                <td>24X35A6608</td>
+                <td><strong>NAME</strong></td>
+                <td>Uduthala Sridhar</td>
+                <td><strong>ATTENDEEID</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>COLLEGE CODE</strong></td>
+                <td>X3</td>
+                <td><strong>BRANCH CODE</strong></td>
+                <td>AI&ML</td>
+                <td><strong>SEMESTER</strong></td>
+                <td>4SEM</td>
+            </tr>
+            <tr>
+                <td><strong>WORKING DAYS</strong></td>
+                <td>39</td>
+                <td><strong>NUMBER OF DAYS PRESENT</strong></td>
+                <td>27.5</td>
+                <td><strong>ATTENDANCE PERCENTAGE(%)</strong></td>
+                <td>69</td>
+            </tr>
+            <tr>
+                <td><strong>ATTENDANCE CALCULATED</strong></td>
+                <td colspan="5">Feb 19, 2025 22:34:20 PM</td>
+            </tr>
+            <tr>
+                <td><strong>TOTAL WORKING DAYS CONSIDERED FOR EXAMS</strong></td>
+                <td>90</td>
+                <td><strong>TOTAL PRESENT DAYS CONSIDERED FOR EXAMS</strong></td>
+                <td>47.5</td>
+                <td><strong>ATTENDANCE % TO BE CONSIDERED FOR EXAMINATION</strong></td>
+                <td>52</td>
+            </tr>
+        </table>
+
+        <table class="attendance-table">
+            <tr>
+                <th></th>
+                <th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th>
+                <th>08</th><th>09</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th>
+                <th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th>
+                <th>22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th>
+                <th>29</th><th>30</th><th>31</th>
+            </tr>
+            <tr>
+                <td>January</td>
+                <td colspan="31">-</td>
+            </tr>
+            <tr>
+                <td>database management system</td>
+                <td>W</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>W</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>A</td>
+                <td>W</td><td>P</td><td>A</td><td>P</td><td>W</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>A</td><td>P</td><td>P</td><td>A</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>discrete mathamatics</td>
+                <td>H</td><td>E</td><td>P</td><td>E</td><td>W</td><td>P</td><td>P</td>
+                <td>P</td><td>W</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>A</td><td>W</td><td>P</td><td>P</td><td>HP</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>OOP's through Java</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Automata compiler design</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Introducion to artifical Intiligence</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>DBMS LAB</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>JAVA LAB</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Prolog LAB</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>real time project
+                </td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            <tr>
+                <td>gender sentization Lab</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Febrauary</td>
+                <td colspan="31">-</td>
+            </tr>
+            <tr>
+                <td>database management system</td>
+                <td>W</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>W</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>A</td>
+                <td>W</td><td>P</td><td>A</td><td>P</td><td>W</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>A</td><td>P</td><td>P</td><td>A</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>discrete mathamatics</td>
+                <td>H</td><td>E</td><td>P</td><td>E</td><td>W</td><td>P</td><td>P</td>
+                <td>P</td><td>W</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>A</td><td>W</td><td>P</td><td>P</td><td>HP</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>OOP's through Java</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Automata compiler design</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Introducion to artifical Intiligence</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>DBMS LAB</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>JAVA LAB</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>Prolog LAB</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+            <tr>
+                <td>real time project
+                </td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            <tr>
+                <td>gender sentization Lab</td>
+                <td>A</td><td>W</td><td>A</td><td>A</td><td>P</td><td>E</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td>
+                <td>P</td><td>P</td><td>P</td>
+            </tr>
+        </table>
+
+        <div class="legend">
+            <span class="present">P - Present</span>
+            <span class="absent">A - Absent</span>
+            <span class="holiday">H - Holiday</span>
+            <span class="weekend">W - Weekend</span>
+            <span class="halfday">HP - Half Day Present</span>
+        </div>
+
+        <button onclick="window.print()" class="print-btn">Print</button>
+    </div>
+</body>
+</html>

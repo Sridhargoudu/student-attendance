@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Sign-In</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        form { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button { width: 100%; padding: 10px; margin: 5px 0; }
+        .error { color: red; font-size: 14px; }
+        .welcome-message { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <h2>Staff Sign-In</h2>
+    <form id="signinForm" onsubmit="event.preventDefault(); loginStaff();">
+        <input type="text" id="staffid" placeholder="Enter ID" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <label>
+            <input type="checkbox" id="rememberMe"> Remember Me
+        </label>
+        <button type="submit">Sign In</button>
+    </form>
+
+    <p>Don't have an account? <a href="staff_signup.html">Sign up</a></p>
+
+    <div class="error" id="errorMessage"></div>
+
+    <div class="welcome-message" id="welcomeMessage"></div>
+
+    <script>
+        async function loginStaff() {
+            let staffId = document.getElementById("staffid").value.toUpperCase(); // Ensure uppercase format
+            let password = document.getElementById("password").value;
+            let rememberMe = document.getElementById("rememberMe").checked;
+
+            if (!staffId || !password) {
+                alert("⚠️ Please enter both Staff ID and Password!");
+                return;
+            }
+
+            try {
+                let response = await fetch("http://localhost:5000/staff_signin", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ staffId, password }),
+                });
+
+                let data = await response.json();
+
+                if (response.ok) {
+                    if (rememberMe) {
+                        localStorage.setItem("token", data.token);
+                    } else {
+                        sessionStorage.setItem("token", data.token);
+                    }
+
+                    alert("✅ Login Successful!");
+                    window.location.href = "staff_dashboard.html"; // Redirect to staff dashboard
+                } else {
+                    document.getElementById("errorMessage").innerText = "❌ " + data.error;
+                }
+            } catch (error) {
+                console.error("Login Error:", error);
+                alert("Something went wrong. Please try again.");
+            }
+        }
+    </script>
+
+</body>
+</html>

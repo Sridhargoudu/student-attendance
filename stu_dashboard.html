@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, student dashboard</h2>
+        <ul>
+            <li><button onclick="navigateTo('daily_attendance.html')">Daily Attendance</button></li>
+            <li><button onclick="navigateTo('monthly_attendance.html')">Monthly Attendance</button></li>
+            <li><button onclick="navigateTo('overall_attendance.html')">Overall Attendance</button></li>
+        </ul>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function logout() {
+            alert("Logged out successfully!");
+            window.location.href = "index.html";
+        }
+        function logout() {
+        localStorage.removeItem("token");
+        alert("Logged out successfully!");
+        window.location.href = "stu_signin.html";
+    }
+   /* const token = localStorage.getItem("token");
+    if (!token) {
+        alert("You must log in first!");
+        window.location.href = "stu_signin.html";
+    }*/
+        </script>
+</body>
+</html>

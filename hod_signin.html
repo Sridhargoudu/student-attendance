@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hod Sign-In</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        form { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button { width: 100%; padding: 10px; margin: 5px 0; }
+        .error { color: red; font-size: 14px; }
+        .welcome-message { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <h2>HOD Sign-In</h2>
+    <form id="signinForm" onsubmit="event.preventDefault(); loginStaff();">
+        <input type="text" id="hodId" placeholder="Enter ID" required>
+        <select id="branch" required>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="civil">CIVIL</option>
+            <option value="mech">MECH</option>
+            <option value="eee">EEE</option>
+            <option value="aiml">AIML</option>
+            <option value="aids">AIDS</option>
+            <option value="iot">IOT</option>
+            <option value="cs">CS</option>
+            <option value="it">IT</option>
+        </select>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <label>
+            <input type="checkbox" id="rememberMe"> Remember Me
+        </label>
+        <button type="submit">Sign In</button>
+    </form>
+
+    <p>Don't have an account? <a href="hod_signup.html">Sign up</a></p>
+
+    <div class="error" id="errorMessage"></div>
+
+    <div class="welcome-message" id="welcomeMessage"></div>
+
+    <script>
+        async function loginStaff() {
+            let hodId = document.getElementById("hodId").value.toUpperCase(); // ✅ Correct variable name
+            let branch = document.getElementById("branch").value;
+            let password = document.getElementById("password").value;
+            let rememberMe = document.getElementById("rememberMe").checked;
+    
+            if (!hodId || !branch || !password) {
+                alert("⚠️ Please enter both HOD ID and Password!");
+                return;
+            }
+    
+            try {
+                let response = await fetch("http://localhost:5000/hod_signin", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ hodId, branch, password }), // ✅ Correct variable used
+                });
+    
+                let data = await response.json();
+    
+                if (response.ok) {
+                    if (rememberMe) {
+                        localStorage.setItem("token", data.token);
+                    } else {
+                        sessionStorage.setItem("token", data.token);
+                    }
+    
+                    alert("✅ Login Successful!");
+                    window.location.href = "hod_dashboard.html"; // Redirect to HOD dashboard
+                } else {
+                    document.getElementById("errorMessage").innerText = "❌ " + data.error;
+                }
+            } catch (error) {
+                console.error("Login Error:", error);
+                alert("❌ Something went wrong. Please try again.");
+            }
+        }
+    </script>
+    
+</body>
+</html>

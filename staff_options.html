@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOD Options</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Staff Options</h2>
+        <button onclick="navigateTo('staff_signup.html')">Signup</button>
+        <button onclick="navigateTo('staff_signin.html')">Login</button>
+        <button onclick="alert('Logged out successfully!'); navigateTo('index.html')">Logout</button>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

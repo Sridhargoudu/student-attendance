@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Timetable</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        select, input, button { display: block; margin: 10px auto; padding: 10px; width: 80%; }
+    </style>
+</head>
+<body>
+
+    <h2>Upload Timetable</h2>
+    <form id="timetableForm">
+        <select id="branch">
+            <option value="">Select Branch</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="MECH">MECH</option>
+        </select>
+
+        <select id="year">
+            <option value="">Select Year</option>
+            <option value="1st">1st</option>
+            <option value="2nd">2nd</option>
+            <option value="3rd">3rd</option>
+            <option value="4th">4th</option>
+        </select>
+
+        <select id="section">
+            <option value="">Select Section</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+        </select>
+
+        <select id="semester">
+            <option value="">Select Semester</option>
+            <option value="Sem 1">Sem 1</option>
+            <option value="Sem 2">Sem 2</option>
+        </select>
+
+        <input type="text" id="subject" placeholder="Enter Subject Name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("timetableForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let branch = document.getElementById("branch").value;
+            let year = document.getElementById("year").value;
+            let section = document.getElementById("section").value;
+            let semester = document.getElementById("semester").value;
+            let subject = document.getElementById("subject").value;
+
+            if (!branch || !year || !section || !semester || !subject) {
+                alert("Please fill all details.");
+                return;
+            }
+
+            // Redirect to timetable display page with query parameters
+            const url = `timetable_display.html?branch=${branch}&year=${year}&section=${section}&semester=${semester}&subject=${subject}`;
+            window.location.href = url;
+        });
+    </script>
+
+</body>
+</html>

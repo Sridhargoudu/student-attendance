@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Sign-In</title>
+    <link rel="stylesheet" href="stu_styles.css">
+    <script src="stu_scrpt.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Sign-In</h2>
+        <input type="text" id="loginId" placeholder="Enter Student ID (24X35A6608)">
+        <input type="password" id="loginPassword" placeholder="Enter Password">
+        
+        <label>
+            <input type="checkbox" id="rememberMe"> Keep me logged in for 3 months
+        </label>
+
+        <button onclick="loginStudent()">Sign In</button>
+        <p>Don't have an account? <a href="stu_signup.html">Sign Up</a></p>
+    </div>
+    <script>
+        async function loginStudent() {
+    const studentId = document.getElementById("loginId").value.toUpperCase(); // Ensure uppercase format
+    const password = document.getElementById("loginPassword").value;
+    const rememberMe = document.getElementById("rememberMe").checked;
+
+    if (!studentId || !password) {
+        alert("Please enter both Student ID and Password!");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:5000/stu_signin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ studentId, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            if (rememberMe) {
+                localStorage.setItem("token", data.token);
+            } else {
+                sessionStorage.setItem("token", data.token);
+            }
+
+            alert("Login Successful!");
+            window.location.href = "stu_dashboard.html"; // Redirect to student dashboard
+        } else {
+            alert("Login failed: " + data.error);
+        }
+    } catch (error) {
+        console.error("Login Error:", error);
+        alert("Something went wrong. Please try again.");
+    }
+}
+
+        </script>
+</body>
+</html>

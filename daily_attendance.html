@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Attendance</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Daily Attendance</h2>
+        <form id="dailyAttendanceForm">
+            <label for="branch">Select Branch:</label>
+            <select id="branch">
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>IT</option>
+                <option>MECH</option>
+                <option>CIVIL</option>
+                <option>AI&ML</option>
+            </select>
+
+            <label for="year">Select Year:</label>
+            <select id="year">
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+            </select>
+
+            <label for="section">Sele ct Section:</label>
+            <select id="section">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="attendanceTable" style="display:none;">
+            <h3>Attendance Sheet</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Students Present</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceData"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("dailyAttendanceForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let subjects = ["Math", "Physics", "Chemistry", "CS"];
+            let attendanceData = document.getElementById("attendanceData");
+            attendanceData.innerHTML = "";
+
+            subjects.forEach(subject => {
+                let studentsPresent = Math.floor(Math.random() * 50) + 1;
+                let row = `<tr><td>${subject}</td><td>${studentsPresent}</td></tr>`;
+                attendanceData.innerHTML += row;
+            });
+
+            document.getElementById("attendanceTable").style.display = "block";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Attendance</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Monthly Attendance</h2>
+        <form id="monthlyAttendanceForm">
+            <label for="branch">Select Branch:</label>
+            <select id="branch">
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>IT</option>
+                <option>CIVIL</option>
+                <option>IOT</option>
+                <option>CS</option>
+                <option>AI&ML</option>
+            </select>
+
+            <label for="year">Select Year:</label>
+            <select id="year">
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+            </select>
+
+            <label for="section">Select Section:</label>
+            <select id="section">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="attendanceTable" style="display:none;">
+            <h3>Attendance Sheet</h3>
+            <table id="attendanceSheet" border="1">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <!-- Days of the month (1-30) -->
+                        <script>
+                            for (let i = 1; i <= 30; i++) {
+                                document.write(`<th>${i}</th>`);
+                            }
+                        </script>
+                    </tr>
+                </thead>
+                <tbody id="attendanceData"></tbody>
+            </table>
+            <button onclick="exportToExcel()">Save as Excel</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("monthlyAttendanceForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let students = [
+                { id: "001", name: "Abhishek Tiwari" },
+                { id: "002", name: "Aditya Malegaonkar" },
+                { id: "003", name: "Ajay Lodhi" },
+                { id: "004", name: "Amar Singh" },
+                { id: "005", name: "Anushree More" }
+            ];
+            let attendanceData = document.getElementById("attendanceData");
+            attendanceData.innerHTML = "";
+
+            students.forEach(student => {
+                let row = `<tr><td>${student.id}</td><td>${student.name}</td>`;
+                for (let i = 1; i <= 30; i++) {
+                    let status = ["P", "A"][Math.floor(Math.random() * 2)]; // Random attendance (P, A)
+                    row += `<td>${status}</td>`;
+                }
+                row += `</tr>`;
+                attendanceData.innerHTML += row;
+            });
+
+            document.getElementById("attendanceTable").style.display = "block";
+        });
+
+        function exportToExcel() {
+            let table = document.getElementById("attendanceSheet");
+            let wb = XLSX.utils.table_to_book(table, { sheet: "Attendance" });
+            XLSX.writeFile(wb, "Monthly_Attendance.xlsx");
+        }
+    </script>
+</body>
+</html>

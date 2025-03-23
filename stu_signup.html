@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Signup</title>
+    <link rel="stylesheet" href="stu_styles.css">
+  
+</head>
+<body>
+    <div class="container">
+        <h2>Student Sign-Up</h2>
+        <input type="text" id="name" placeholder="Enter Name">
+        <input type="text" id="studentId" placeholder="Enter Student ID">
+        <select id="branch">
+            <option value="cse">cse</option>
+            <option value="ece">ece</option>
+            <option value="civil">civil</option>
+            <option value="mech">mech</option>
+            <option value="eee">eee</option>
+            <option value="aiml">aiml</option>
+            <option value="aids">aids</option>
+            <option value="iot">iot</option>
+            <option value="cs">cs</option>
+            <option value="it">it</option>
+        </select>
+        <select id="section">
+            <option value="A">sec-A</option>
+            <option value="B">sec-B</option>
+            <option value="C">sec-C</option>
+        </select>
+        <select id="year">
+            <option value="1st">1st Year</option>
+            <option value="2nd">2nd Year</option>
+            <option value="3rd">3rd Year</option>
+            <option value="4th">4th Year</option>
+        </select>
+        
+
+        <input type="password" id="password" placeholder="pws: DDMMYYYY">
+        <button onclick="registerStudent()">Sign Up</button>
+        <p>Already have an account? <a href="stu_signin.html">Sign In</a></p>
+    </div>
+    <script>
+      async function registerStudent() {
+    let name = document.getElementById("name").value;
+    let studentId = document.getElementById("studentId").value;
+    let branch = document.getElementById("branch").value;
+    let section = document.getElementById("section").value;
+    let year = document.getElementById("year").value;
+    let password = document.getElementById("password").value;
+
+    if (!name || !studentId || !branch || !section || !year || !password) {
+        alert("⚠️ Please fill all fields!");
+        return;
+    }
+
+    try {
+        let response = await fetch("http://localhost:5000/stu_signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, studentId, branch, section, year, password })
+        });
+
+        let data = await response.text();
+        alert(data); // Show success or error message
+
+        if (response.ok) {
+            window.location.href = "stu_signin.html"; // Redirect to Sign-In Page
+        }
+    } catch (error) {
+        console.error("Signup Error:", error);
+        alert("❌ Signup Failed! Check console.");
+    }
+}
+
+
+        </script>
+</body>
+</html>
